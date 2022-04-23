@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1 style="text-align:center">Library Application</h1>
+   
+</div>
+
+<div class="row">
+    <div class="col-md-1">
+ <p><a class="btn btn-default" href="@Url.Action("Signup","Home")">SignUp &raquo;</a></p>
+    </div>
+    <div class="col-md-1">
+       <p><a class="btn btn-default"href="@Url.Action("Login","Home")">Login &raquo;</a></p>
+    </div>
+    <div class="col-md-1">
+<p><a class="btn btn-default" href="@Url.Action("Admin","Home")">Admin &raquo;</a></p>
+    </div>
+</div>
