@@ -12,9 +12,11 @@
 
 ## User Guide
 
-- Home page : Includes Signup Login and Admin button
-- SignUp :  Create account
-- Login Page : Login page is not fully functional 
-- Admin Page : Includes two links Book List And Author List 
-- Book List Page  :  You can perfrom curd operation Like Add Edit and Delete Books 
-- Author List Page : you can Perform curd operation Like Add Edit and Delete Authors 
+- Home page : Includes Signup Login and Admin button ("/")
+- SignUp :  Create account and go back to login page  ("Home/Signup")
+- Login Page : Login with email and it will redirect you to the user page ("Home/Login")
+- User Page :  you can rent a book ("/User")
+- Rented page : you return borrow book ("User/Rented")
+- Admin Page : Includes two links Book List And Author List ("Home/Admin")
+- Book List Page  :  You can perfrom operations like Add Edit and Delete Books list ("BookData")
+- Author List Page : You can perfrom operations like Add Edit and Delete Author list ("Author")
