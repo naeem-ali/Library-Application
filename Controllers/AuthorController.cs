@@ -112,4 +112,66 @@ namespace Library_Application.Controllers
 
       
     }
+
+    public class Authors
+    {
+
+        static string connectionString = ConfigurationManager.ConnectionStrings["LibraryDB"].ConnectionString;
+
+        public static List<Author> Getallauthorsusingbookid(int bookid)
+        {
+            List<Author> aList = new List<Author>();
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                con.Open();
+                String query = @"SELECT * FROM Books_Authors join Author on Author.A_ID= Books_Authors.A_ID  where B_ID=@bookId";
+                SqlCommand cmd = new SqlCommand(query);
+                cmd.Connection = con;
+                cmd.Parameters.AddWithValue("@bookId", bookid);
+               
+
+                using (SqlDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
+                {
+
+                    while (reader.Read())
+                    {
+                        Author a = new Author();
+                        a.A_ID = reader.GetInt32(reader.GetOrdinal("A_ID"));
+                        a.A_Name = reader.GetString(reader.GetOrdinal("A_Name"));
+                        aList.Add(a);
+                    }
+                }
+            }
+
+            return aList;
+        }
+
+        public static List<Author> Getall()
+        {
+
+            List<Author> aList = new List<Author>();
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                con.Open();
+                string query = "Select * from Author";
+                SqlCommand cmd = new SqlCommand(query);
+                cmd.Connection = con;
+
+                using (SqlDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
+                {
+
+                    while (reader.Read())
+                    {
+                        Author a = new Author();
+                        a.A_ID = reader.GetInt32(reader.GetOrdinal("A_ID"));
+                        a.A_Name = reader.GetString(reader.GetOrdinal("A_Name"));
+                        //author.Name = reader.GetString(reader.GetOrdinal("Name"));
+                        //author.NameEmail = author.Name + " (" + author.Email + ")";
+                        aList.Add(a);
+                    }
+                }
+            }
+            return aList;
+        }
+    }
 }

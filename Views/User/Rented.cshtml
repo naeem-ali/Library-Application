@@ -1,0 +1,39 @@
+﻿@model System.Data.DataTable
+
+@{
+    ViewBag.Title = "Rented";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Rented Books</h2>
+
+<p>
+  @*  @Html.ActionLink("Create New", "Create")*@
+</p>
+<p class="alert-success">
+    @TempData["BRMessage"]
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Title
+        </th>
+        <th></th>
+    </tr>
+
+    @for (int i = 0; i < Model.Rows.Count; i++)
+    {
+        <tr>
+
+            <td>
+                @Model.Rows[i][1]
+            </td>
+           
+            <td>
+                @Html.ActionLink("Book Return", "BookReturn", new { id = Model.Rows[i][0], bookId= Model.Rows[i][2], availability= Model.Rows[i][3]})
+            </td>
+        </tr>
+    }
+
+</table>
+<a href="@Url.Action("Index", "User")"> Back to List </a>

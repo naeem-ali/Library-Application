@@ -1,0 +1,85 @@
+﻿@model IEnumerable<Library_Application.Models.BookModel>
+@using Library_Application.Models
+@using Library_Application.Controllers
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @*@Html.ActionLink("Create New", "Create")*@
+
+</p>
+<p class="alert-success"> @TempData["Message"]</p>
+<table class="table">
+    <tr>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Title)*@
+            @Html.ActionLink("Title", "Index",
+                 new { sortOrder = "Title", CurrentSort = ViewBag.CurrentSort })
+        </th>
+        <th>
+            Author
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Available)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.PageCount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PageNumber)
+            </th>*@
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @foreach (Author a in Authors.Getallauthorsusingbookid(item.ID))
+                {
+                     @a.A_Name
+                    <br/>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Available)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.PageCount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PageNumber)
+                </td>*@
+            <td>
+                @if (item.Available == 0)
+                {
+                    @Html.ActionLink("Rent", "Rent", new { id = item.ID, available = item.Available }, htmlAttributes: new { @class = "btn disabled" })
+                }
+                else
+                {
+                    @Html.ActionLink("Rent", "Rent", new { id = item.ID, available = item.Available })
+                }
+                @*@Html.ActionLink("Details", "Details", new { id=item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.ID })*@
+            </td>
+        </tr>
+    }
+
+</table>
+
+@Html.ActionLink("Rented", "Rented") | 
+<a href="@Url.Action("Index", "Home")"> Back </a>
+

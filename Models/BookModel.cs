@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Library_Application.Models
 {
@@ -10,7 +11,11 @@ namespace Library_Application.Models
 
         public int Available { get; set; }
 
-        public string Author { get; set; }
+        public int Quantity { get; set; }
+
+        public int PageCount { get; set; }
+        public int PageNumber { get; set; }
+        public List<int> Author { get; set; }
 
     }
 }

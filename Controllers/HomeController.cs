@@ -34,7 +34,7 @@ namespace Library_Application.Controllers
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 con.Open();
-                string query = "Insert Into USER Values (@Name, @Email)";
+                string query = "Insert Into [USER] Values (@Name, @Email)";
                 SqlCommand cmd = new SqlCommand(query, con);
                 cmd.Parameters.AddWithValue("@Name", userModel.Name);
                 cmd.Parameters.AddWithValue("@Email", userModel.Email);
@@ -63,7 +63,7 @@ namespace Library_Application.Controllers
                 
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = con;
-                cmd.CommandText = "Select * from USER where Email ='"+userModel.Email+"'";
+                cmd.CommandText = "Select * from [USER] where Email ='"+userModel.Email+"'";
                
                 
                 using (SqlDataReader reader = cmd.ExecuteReader())
@@ -71,7 +71,8 @@ namespace Library_Application.Controllers
 
                     if (reader.Read())
                     {
-                        return View("Index");
+                        TempData["User"] = reader.GetInt32(reader.GetOrdinal("UserID"));
+                        return RedirectToAction("Index","User");
                     }
                     else
                     {
